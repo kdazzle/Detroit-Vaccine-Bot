@@ -6,7 +6,7 @@ import requests
 
 VICTORY_URL = 'https://www.youtube.com/watch?v=eBShN8qT4lk'
 ELIGIBILITY_URL = 'https://www.cvs.com/vaccine/intake/store/cvd-schedule.html?icid=coronavirus-lp-vaccine-sd-statetool'
-SLEEP_SECONDS = 10
+SLEEP_SECONDS = .5
 
 
 def check_zone_availability(zone):
@@ -49,6 +49,6 @@ while not is_victory:
     is_victory = listen()
 
 print('Huzzah!')
-webbrowser.open(ELIGIBILITY_URL)
+# webbrowser.open(ELIGIBILITY_URL)
 webbrowser.open(VICTORY_URL)
 print(f'That took {counter} attempts')
