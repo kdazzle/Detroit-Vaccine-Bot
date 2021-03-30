@@ -24,7 +24,7 @@ def listen():
     if response.status_code != 200:
         return
 
-    michigan_content = response.json()['responsePayloadData']['data']['NY']
+    michigan_content = response.json()['responsePayloadData']['data']['MI']
     detroit_content = {}
     for zone in michigan_content:
         if zone['city'].lower() == 'detroit':
