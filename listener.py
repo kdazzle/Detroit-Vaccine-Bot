@@ -9,6 +9,10 @@ ELIGIBILITY_URL = 'https://www.cvs.com/vaccine/intake/store/cvd-schedule.html?ic
 SLEEP_SECONDS = 10
 
 
+def is_available(zone):
+    return zone['status'].lower() == 'available'
+
+
 def listen():
     availability_url = 'https://www.cvs.com/immunizations/covid-19-vaccine.vaccine-status.json'
     # or this one: https://www.cvs.com/vaccine/intake/store/covid-screener/covid-qns
@@ -26,19 +30,15 @@ def listen():
 
     michigan_content = response.json()['responsePayloadData']['data']['MI']
     detroit_content = {}
+    target_cities = ['detroit', 'grosse pointe']
+    is_available = False
     for zone in michigan_content:
-        if zone['city'].lower() == 'detroit':
-        # if zone['city'].lower() == 'binghamton':
-            detroit_content = zone
+        if zone['city'].lower() in target_cities and is_available(zone):
+            is_available = True
+            print(f"Availability in {zone['city']}!")
             break
 
-    if not detroit_content:
-        return False
-
-    if detroit_content['status'].lower() == 'available':
-        return True
-
-    return False
+    return is_available
 
 
 is_victory = False
