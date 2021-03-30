@@ -9,7 +9,7 @@ ELIGIBILITY_URL = 'https://www.cvs.com/vaccine/intake/store/cvd-schedule.html?ic
 SLEEP_SECONDS = 10
 
 
-def is_available(zone):
+def check_zone_availability(zone):
     return zone['status'].lower() == 'available'
 
 
@@ -33,7 +33,7 @@ def listen():
     target_cities = ['detroit', 'grosse pointe']
     is_available = False
     for zone in michigan_content:
-        if zone['city'].lower() in target_cities and is_available(zone):
+        if zone['city'].lower() in target_cities and check_zone_availability(zone):
             is_available = True
             print(f"Availability in {zone['city']}!")
             break
